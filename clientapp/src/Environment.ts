@@ -27,7 +27,8 @@ export const GetEnvironment = (): string => {
 const EnvironmentConfig = (): IEnvironment => {
   const config: IEnvironment = {
     Env: GetEnvironment(),
-    SiteUrl: window.location.origin.toLowerCase()
+    // SiteUrl: window.location.origin.toLowerCase()
+    SiteUrl: 'http://127.0.0.1:5000'
   };
   return config;
 };

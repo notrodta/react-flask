@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import StoreService from '../services/StoreService';
+import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 const Store = () => {
   useEffect(() => {
@@ -13,9 +15,14 @@ const Store = () => {
   }, []);
 
   return (
-    <div>
-      <p>Store</p>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <p>Store</p>
+      </Grid>
+      <Grid item xs={6}>
+        <TextField id="outlined-basic" label="Store name" variant="outlined" />
+      </Grid>
+    </Grid>
   );
 };
 
