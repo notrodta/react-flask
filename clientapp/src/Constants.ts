@@ -1,8 +1,8 @@
-const Constants = {
+const constants = {
   routePath: {
     home: '/',
     item: '/items'
   }
 };
 
-export default Constants;
+export default constants;

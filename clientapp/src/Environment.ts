@@ -3,7 +3,7 @@ export interface IEnvironment {
   SiteUrl: string;
 }
 
-export const GetEnvironment = (): string => {
+export const getEnvironment = (): string => {
   const origin = window.location.origin.toLowerCase();
 
   //flask localhost: http://127.0.0.1:5000/
@@ -24,13 +24,13 @@ export const GetEnvironment = (): string => {
   return 'PROD';
 };
 
-const EnvironmentConfig = (): IEnvironment => {
+const environmentConfig = (): IEnvironment => {
   const config: IEnvironment = {
-    Env: GetEnvironment(),
+    Env: getEnvironment(),
     // SiteUrl: window.location.origin.toLowerCase()
     SiteUrl: 'http://127.0.0.1:5000'
   };
   return config;
 };
 
-export default EnvironmentConfig();
+export default environmentConfig();

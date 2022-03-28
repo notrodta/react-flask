@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import StoreService from '../../services/StoreService';
+import storeService from '../../services/StoreService';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -21,7 +21,7 @@ const Items = (props: IItems) => {
   };
 
   useEffect(() => {
-    StoreService.getAll().then((res) => {
+    storeService.getAll().then((res) => {
       console.log(res);
     });
   }, []);

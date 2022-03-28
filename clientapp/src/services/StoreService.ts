@@ -1,12 +1,13 @@
-import ApiRequest from './ApiRequest';
-import EnvironmentConfig from '../Environment';
+import apiRequest from './ApiRequest';
+import environmentConfig from '../environment';
 import { AxiosResponse } from 'axios';
 
-const config = EnvironmentConfig;
+const config = environmentConfig;
 
-const StoreService = {
+const storeService = {
   getAll: () =>
-    ApiRequest.get(`${config.SiteUrl}/stores`)
+    apiRequest
+      .get(`${config.SiteUrl}/stores`)
       .then((response: AxiosResponse) => {
         return response ? response.data : {};
       })
@@ -14,7 +15,8 @@ const StoreService = {
         console.log(error);
       }),
   get: (storeName: string) =>
-    ApiRequest.get(`${config.SiteUrl}/stores/${storeName}`)
+    apiRequest
+      .get(`${config.SiteUrl}/stores/${storeName}`)
       .then((response: AxiosResponse) => {
         return response ? response.data : {};
       })
@@ -23,4 +25,4 @@ const StoreService = {
       })
 };
 
-export default StoreService;
+export default storeService;

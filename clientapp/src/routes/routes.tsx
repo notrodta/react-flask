@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Constants from '../Constants';
+import constants from '../constants';
 import Stores from '../components/store/Stores';
 import Items from '../components/item/Items';
 
@@ -8,9 +8,9 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={Constants.routePath.item} component={Items} />
-        <Route path={Constants.routePath.home} component={Stores} />
-        <Route exact path={Constants.routePath.home}>
+        <Route path={constants.routePath.item} component={Items} />
+        <Route path={constants.routePath.home} component={Stores} />
+        <Route exact path={constants.routePath.home}>
           <Stores />
         </Route>
       </Switch>

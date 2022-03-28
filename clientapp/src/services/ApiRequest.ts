@@ -1,5 +1,6 @@
 import axios, { AxiosPromise } from 'axios';
-import { GetEnvironment } from '../Environment';
+// import { GetEnvironment } from '../environment';
+import { getEnvironment } from '../environment';
 
 export interface IAxiosRequestOptions {
   accept?: string;
@@ -13,11 +14,11 @@ const defaultOptions: IAxiosRequestOptions = {
   accept: 'application/json',
   headers: {
     'Content-Type': 'application/json',
-    ...(GetEnvironment() !== 'LOCAL' && { Pragma: 'no-cache' })
+    ...(getEnvironment() !== 'LOCAL' && { Pragma: 'no-cache' })
   }
 };
 
-const ApiRequest = {
+const apiRequest = {
   get: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
     return axios.get(url, { ...defaultOptions, ...options });
   },
@@ -32,4 +33,4 @@ const ApiRequest = {
   }
 };
 
-export default ApiRequest;
+export default apiRequest;

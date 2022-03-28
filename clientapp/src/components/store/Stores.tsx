@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import StoreService from '../../services/StoreService';
+import storeService from '../../services/StoreService';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -21,7 +21,7 @@ const Stores = (props: IStores) => {
     // fetch('http://127.0.0.1:5000/items', { headers })
     //   .then((response) => response.json())
     //   .then((data) => console.log(data));
-    StoreService.getAll().then((res) => {
+    storeService.getAll().then((res) => {
       console.log(res);
     });
   }, []);
