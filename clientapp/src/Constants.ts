@@ -1,7 +1,7 @@
 const Constants = {
   routePath: {
     home: '/',
-    item: '/item'
+    item: '/items'
   }
 };
 

@@ -3,10 +3,19 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import StoreService from '../../services/StoreService';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
-interface IStore extends RouteComponentProps<any> {}
+interface IStores extends RouteComponentProps<any> {}
 
-const Store = (props: IStore) => {
+const Stores = (props: IStores) => {
+  const handleStoreNameChange = (e: any) => {
+    console.log(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log('submit');
+  };
+
   useEffect(() => {
     // const headers = { 'Content-Type': 'application/json' };
     // fetch('http://127.0.0.1:5000/items', { headers })
@@ -20,13 +29,21 @@ const Store = (props: IStore) => {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <p>Store</p>
+        <p>Stores Page</p>
       </Grid>
       <Grid item xs={6}>
-        <TextField id="outlined-basic" label="Store name" variant="outlined" />
+        <TextField
+          id="outlined-basic"
+          label="Store name"
+          variant="outlined"
+          onChange={handleStoreNameChange}
+        />
+        <Button variant="contained" onClick={handleSubmit}>
+          Submit
+        </Button>
       </Grid>
     </Grid>
   );
 };
 
-export default withRouter(Store);
+export default withRouter(Stores);
