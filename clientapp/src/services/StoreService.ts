@@ -16,7 +16,7 @@ const storeService = {
       }),
   get: (storeName: string) =>
     apiRequest
-      .get(`${config.SiteUrl}/stores/${storeName}`)
+      .get(`${config.SiteUrl}/store/${storeName}`)
       .then((response: AxiosResponse) => {
         return response ? response.data : {};
       })
@@ -25,7 +25,7 @@ const storeService = {
       }),
   post: (storeName: string) =>
     apiRequest
-      .post(`${config.SiteUrl}/stores/${storeName}`)
+      .post(`${config.SiteUrl}/store/${storeName}`)
       .then((response: AxiosResponse) => {
         return response ? response.data : {};
       })
