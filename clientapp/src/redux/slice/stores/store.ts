@@ -10,7 +10,6 @@ const store = createSlice({
   initialState,
   reducers: {
     setStoreSlice: (state, action) => {
-      console.log(action);
       state = action.payload;
       return state;
     }

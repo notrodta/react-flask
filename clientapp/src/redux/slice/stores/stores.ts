@@ -15,11 +15,10 @@ const stores = createSlice({
   reducers: {
     getStoresSlice: (state: StoresState, action: PayloadAction<StoresState>) => {
       state = action.payload;
-      // console.log(state);
       return state;
     },
-    addStoreSlice: (state: any, action) => {
-      state.push(action.payload);
+    addStoreSlice: (state: StoresState, action: PayloadAction<Store>) => {
+      state.stores.push(action.payload);
       return state;
     },
     editStoreSlice: (state: any, action) => {

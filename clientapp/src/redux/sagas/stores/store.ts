@@ -7,27 +7,22 @@ import {
   deleteStoreSlice
 } from '../../slice/stores/Stores';
 import storeService from '../../../services/StoreService';
-import { Get_STORES } from '../../types/index';
-import axios, { AxiosResponse } from 'axios';
+import { GET_STORES, CREATE_STORE } from '../../types/index';
 
-export const getUsersAPI = async () => axios.get('/users');
-
-// export const getUsersAPI = async () =>
-//   axios.get('/users').then((response: AxiosResponse) => {
-//     return response ? response.data : {};
-//   });
-
-export function* getStoreSaga(action: any): any {
-  // const stores = yield getUsersAPI();
+export function* getStoreSaga(): any {
   const stores = yield storeService.getAll();
   yield put(getStoresSlice(stores));
-  // yield createUserAPI(action.user);
-  // yield put(addUserSlice(action.user));
-  //Create post service in StoreService
+}
+
+export function* createStoreSaga(action: any): any {
+  yield storeService.post(action.store.name);
+  yield put(addStoreSlice(action.store));
 }
 
 export function* watchStoresAsync() {
-  yield takeEvery(Get_STORES, getStoreSaga);
+  yield takeEvery(GET_STORES, getStoreSaga);
+  yield takeEvery(CREATE_STORE, createStoreSaga);
+
   // yield takeEvery(GET_USERS, getUsersSaga)
   // yield takeEvery(GET_USER_BY_ID, getUserByIdSaga)
   // yield takeEvery(CREATE_USER, createUserSaga)

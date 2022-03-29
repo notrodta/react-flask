@@ -22,6 +22,15 @@ const storeService = {
       })
       .catch(function (error) {
         console.log(error);
+      }),
+  post: (storeName: string) =>
+    apiRequest
+      .post(`${config.SiteUrl}/stores/${storeName}`)
+      .then((response: AxiosResponse) => {
+        return response ? response.data : {};
+      })
+      .catch(function (error) {
+        console.log(error);
       })
 };
 

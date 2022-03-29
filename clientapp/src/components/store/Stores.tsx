@@ -1,30 +1,38 @@
 import React, { useEffect } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import storeService from '../../services/StoreService';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Get_STORES } from '../../redux/types/index';
+import { GET_STORES, CREATE_STORE } from '../../redux/types/index';
 import Store from '../../models/Store';
 import { ApplicationState } from '../../Store';
+import { setStoreSlice } from '../../redux/slice/stores/Store';
+import { nanoid } from '@reduxjs/toolkit';
 
 interface IStores extends RouteComponentProps<any> {}
 
 const Stores = (props: IStores) => {
   const stores = useSelector<ApplicationState, Store[]>((state) => state.stores.stores);
+  const store = useSelector<ApplicationState, Store>((state) => state.store);
   const dispatch = useDispatch();
 
-  const handleStoreNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+  const handleStoreChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    prop: string
+  ) => {
+    dispatch(setStoreSlice({ ...store, [prop]: e.target.value }));
   };
 
   const handleSubmit = () => {
-    console.log('submit');
+    dispatch({ type: CREATE_STORE, store });
+    const newStore = {} as Store;
+    newStore.name = '';
+    dispatch(setStoreSlice({ ...newStore }));
   };
 
   useEffect(() => {
-    dispatch({ type: Get_STORES });
+    dispatch({ type: GET_STORES });
   }, []);
 
   return (
@@ -37,7 +45,8 @@ const Stores = (props: IStores) => {
           id="outlined-basic"
           label="Store name"
           variant="outlined"
-          onChange={handleStoreNameChange}
+          value={store.name}
+          onChange={(e) => handleStoreChange(e, 'name')}
         />
         <Button variant="contained" onClick={handleSubmit}>
           Submit
@@ -45,7 +54,7 @@ const Stores = (props: IStores) => {
       </Grid>
       <Grid item xs={12}>
         {stores.map((store: Store) => (
-          <div key={store.id}>{store.name}</div>
+          <div key={nanoid(8)}>{store.name}</div>
         ))}
       </Grid>
     </Grid>
