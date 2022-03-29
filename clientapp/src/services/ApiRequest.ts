@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from 'axios';
 // import { GetEnvironment } from '../environment';
-import { getEnvironment } from '../environment';
+import { getEnvironment } from '../Environment';
 
 export interface IAxiosRequestOptions {
   accept?: string;

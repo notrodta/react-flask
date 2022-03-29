@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import constants from '../constants';
+import constants from '../Constants';
 import Stores from '../components/store/Stores';
 import Items from '../components/item/Items';
 

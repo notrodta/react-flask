@@ -1,5 +1,5 @@
 import apiRequest from './ApiRequest';
-import environmentConfig from '../environment';
+import environmentConfig from '../Environment';
 import { AxiosResponse } from 'axios';
 
 const config = environmentConfig;

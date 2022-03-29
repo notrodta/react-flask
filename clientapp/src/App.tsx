@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import reduxStore from './Store';
-import Routes from './routes/routes';
+import Routes from './routes/Routes';
 
 function App() {
   return (

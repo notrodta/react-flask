@@ -1,11 +1,11 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { setStoreSlice } from '../../slice/stores/store';
+import { setStoreSlice } from '../../slice/stores/Store';
 import {
   getStoresSlice,
   addStoreSlice,
   editStoreSlice,
   deleteStoreSlice
-} from '../../slice/stores/stores';
+} from '../../slice/stores/Stores';
 import storeService from '../../../services/StoreService';
 import { CREATE_STORE } from '../../types/index';
 
