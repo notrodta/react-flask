@@ -8,11 +8,11 @@ import Button from '@mui/material/Button';
 interface IItems extends RouteComponentProps<any> {}
 
 const Items = (props: IItems) => {
-  const handleItemNameChange = (e: any) => {
+  const handleItemNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
 
-  const handleItemPriceChange = (e: any) => {
+  const handleItemPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
 

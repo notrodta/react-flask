@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import storeService from '../../services/StoreService';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { Get_STORES } from '../../redux/types/index';
+import Store from '../../models/Store';
+import { ApplicationState } from '../../Store';
 
 interface IStores extends RouteComponentProps<any> {}
 
 const Stores = (props: IStores) => {
-  const handleStoreNameChange = (e: any) => {
+  const stores = useSelector<ApplicationState, Store[]>((state) => state.stores.stores);
+  const dispatch = useDispatch();
+
+  const handleStoreNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
   };
 
@@ -17,13 +24,7 @@ const Stores = (props: IStores) => {
   };
 
   useEffect(() => {
-    // const headers = { 'Content-Type': 'application/json' };
-    // fetch('http://127.0.0.1:5000/items', { headers })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
-    storeService.getAll().then((res) => {
-      console.log(res);
-    });
+    dispatch({ type: Get_STORES });
   }, []);
 
   return (
@@ -31,7 +32,7 @@ const Stores = (props: IStores) => {
       <Grid item xs={12}>
         <p>Stores Page</p>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <TextField
           id="outlined-basic"
           label="Store name"
@@ -41,6 +42,11 @@ const Stores = (props: IStores) => {
         <Button variant="contained" onClick={handleSubmit}>
           Submit
         </Button>
+      </Grid>
+      <Grid item xs={12}>
+        {stores.map((store: Store) => (
+          <div key={store.id}>{store.name}</div>
+        ))}
       </Grid>
     </Grid>
   );

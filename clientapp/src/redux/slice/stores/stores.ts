@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Store from '../../../models/Store';
 
-interface StoresState {
+export interface StoresState {
   stores: Store[];
 }
 
@@ -13,8 +13,9 @@ const stores = createSlice({
   name: 'stores',
   initialState,
   reducers: {
-    getStoresSlice: (state: any, action) => {
+    getStoresSlice: (state: StoresState, action: PayloadAction<StoresState>) => {
       state = action.payload;
+      // console.log(state);
       return state;
     },
     addStoreSlice: (state: any, action) => {

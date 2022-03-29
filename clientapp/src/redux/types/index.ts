@@ -1,1 +1,1 @@
-export const CREATE_STORE = 'CREATE_USER';
+export const Get_STORES = 'Get_STORES';
