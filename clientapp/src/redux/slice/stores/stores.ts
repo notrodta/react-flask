@@ -25,8 +25,8 @@ const stores = createSlice({
       state = state.map((i: any) => (i.id == action.payload.id ? action.payload : i));
       return state;
     },
-    deleteStoreSlice: (state: any, action) => {
-      state = state.filter((i: any) => i.id !== action.payload);
+    deleteStoreSlice: (state: StoresState, action) => {
+      state.stores = state.stores.filter((i: any) => i.name !== action.payload);
       return state;
     }
   }

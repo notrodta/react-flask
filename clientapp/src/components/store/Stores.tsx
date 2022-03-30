@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { GET_STORES, CREATE_STORE } from '../../redux/types/index';
+import { GET_STORES, CREATE_STORE, DELETE_STORE_BY_NAME } from '../../redux/types/index';
 import Store from '../../models/Store';
 import { ApplicationState } from '../../Store';
 import { setStoreSlice } from '../../redux/slice/stores/Store';
@@ -31,6 +31,10 @@ const Stores = (props: IStores) => {
     dispatch(setStoreSlice({ ...newStore }));
   };
 
+  const handleDelete = (storeName: string) => {
+    dispatch({ type: DELETE_STORE_BY_NAME, name: storeName });
+  };
+
   useEffect(() => {
     dispatch({ type: GET_STORES });
   }, []);
@@ -54,7 +58,13 @@ const Stores = (props: IStores) => {
       </Grid>
       <Grid item xs={12}>
         {stores.map((store: Store) => (
-          <div key={nanoid(8)}>{store.name}</div>
+          <div key={nanoid(8)}>
+            {store.name}
+            {'   '}
+            <Button variant="contained" onClick={() => handleDelete(store.name)}>
+              Delete
+            </Button>
+          </div>
         ))}
       </Grid>
     </Grid>

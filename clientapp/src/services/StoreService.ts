@@ -31,6 +31,15 @@ const storeService = {
       })
       .catch(function (error) {
         console.log(error);
+      }),
+  delete: (storeName: string) =>
+    apiRequest
+      .delete(`${config.SiteUrl}/store/${storeName}`)
+      .then((response: AxiosResponse) => {
+        return response ? response.data : {};
+      })
+      .catch(function (error) {
+        console.log(error);
       })
 };
 

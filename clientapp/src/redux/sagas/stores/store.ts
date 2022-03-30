@@ -7,7 +7,7 @@ import {
   deleteStoreSlice
 } from '../../slice/stores/Stores';
 import storeService from '../../../services/StoreService';
-import { GET_STORES, CREATE_STORE } from '../../types/index';
+import { GET_STORES, CREATE_STORE, DELETE_STORE_BY_NAME } from '../../types/index';
 
 export function* getStoreSaga(): any {
   const stores = yield storeService.getAll();
@@ -19,9 +19,15 @@ export function* createStoreSaga(action: any): any {
   yield put(addStoreSlice(action.store));
 }
 
+export function* createStoreByNameSaga(action: any): any {
+  yield storeService.delete(action.name);
+  yield put(deleteStoreSlice(action.name));
+}
+
 export function* watchStoresAsync() {
   yield takeEvery(GET_STORES, getStoreSaga);
   yield takeEvery(CREATE_STORE, createStoreSaga);
+  yield takeEvery(DELETE_STORE_BY_NAME, createStoreByNameSaga);
 
   // yield takeEvery(GET_USERS, getUsersSaga)
   // yield takeEvery(GET_USER_BY_ID, getUserByIdSaga)
