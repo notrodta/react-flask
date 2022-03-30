@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, call } from 'redux-saga/effects';
 import { setStoreSlice } from '../../slice/stores/Store';
 import {
   getStoresSlice,
@@ -10,17 +10,18 @@ import storeService from '../../../services/StoreService';
 import { GET_STORES, CREATE_STORE, DELETE_STORE_BY_NAME } from '../../types/index';
 
 export function* getStoreSaga(): any {
-  const stores = yield storeService.getAll();
+  const stores = yield call(storeService.getAll);
   yield put(getStoresSlice(stores));
 }
 
 export function* createStoreSaga(action: any): any {
-  yield storeService.post(action.store.name);
+  // yield storeService.post(action.store.name); // this also works
+  yield call(storeService.post, action.store.name);
   yield put(addStoreSlice(action.store));
 }
 
 export function* createStoreByNameSaga(action: any): any {
-  yield storeService.delete(action.name);
+  yield call(storeService.delete, action.name);
   yield put(deleteStoreSlice(action.name));
 }
 
