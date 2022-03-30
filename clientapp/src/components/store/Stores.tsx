@@ -31,10 +31,6 @@ const Stores = (props: IStores) => {
     dispatch(setStoreSlice({ ...newStore }));
   };
 
-  const handleDelete = (storeName: string) => {
-    dispatch({ type: DELETE_STORE_BY_NAME, name: storeName });
-  };
-
   useEffect(() => {
     dispatch({ type: GET_STORES });
   }, []);
@@ -61,7 +57,9 @@ const Stores = (props: IStores) => {
           <div key={nanoid(8)}>
             {store.name}
             {'   '}
-            <Button variant="contained" onClick={() => handleDelete(store.name)}>
+            <Button
+              variant="contained"
+              onClick={() => dispatch({ type: DELETE_STORE_BY_NAME, name: store.name })}>
               Delete
             </Button>
           </div>
