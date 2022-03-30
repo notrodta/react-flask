@@ -1,6 +1,7 @@
 import apiRequest from './ApiRequest';
 import environmentConfig from '../Environment';
 import { AxiosResponse } from 'axios';
+import { handleError } from './ServiceHelper';
 
 const config = environmentConfig;
 
@@ -12,7 +13,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        throw new Error(error);
+        handleError(error);
       }),
   get: (storeName: string): Promise<any> =>
     apiRequest
@@ -21,7 +22,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        throw new Error(error);
+        handleError(error);
       }),
   post: (storeName: string): Promise<any> =>
     apiRequest
@@ -30,8 +31,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        // console.log(error);
-        throw new Error(error);
+        handleError(error);
       }),
   delete: (storeName: string): Promise<any> =>
     apiRequest
@@ -40,7 +40,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        throw new Error(error);
+        handleError(error);
       })
 };
 
