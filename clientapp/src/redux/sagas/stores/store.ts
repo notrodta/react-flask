@@ -17,8 +17,14 @@ export function* getStoreSaga(): any {
 
 export function* createStoreSaga(action: any): any {
   // yield storeService.post(action.store.name); // this also works
-  yield call(storeService.post, action.store.name);
-  yield put(addStoreSlice(action.store));
+  try {
+    const store = yield call(storeService.post, action.store.name);
+    console.log(store);
+    yield put(addStoreSlice(action.store));
+  } catch (error) {
+    console.log('tes123t');
+    console.log(error);
+  }
 }
 
 export function* createStoreByNameSaga(action: any): any {

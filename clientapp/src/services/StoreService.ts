@@ -12,7 +12,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        console.log(error);
+        throw new Error(error);
       }),
   get: (storeName: string): Promise<any> =>
     apiRequest
@@ -21,7 +21,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        console.log(error);
+        throw new Error(error);
       }),
   post: (storeName: string): Promise<any> =>
     apiRequest
@@ -30,7 +30,8 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
+        throw new Error(error);
       }),
   delete: (storeName: string): Promise<any> =>
     apiRequest
@@ -39,7 +40,7 @@ const storeService = {
         return response ? response.data : {};
       })
       .catch(function (error) {
-        console.log(error);
+        throw new Error(error);
       })
 };
 
