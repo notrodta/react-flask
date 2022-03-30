@@ -1,4 +1,4 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery, call, all } from 'redux-saga/effects';
 import { setStoreSlice } from '../../slice/stores/Store';
 import {
   getStoresSlice,
@@ -26,9 +26,15 @@ export function* createStoreByNameSaga(action: any): any {
 }
 
 export function* watchStoresAsync() {
-  yield takeEvery(GET_STORES, getStoreSaga);
-  yield takeEvery(CREATE_STORE, createStoreSaga);
-  yield takeEvery(DELETE_STORE_BY_NAME, createStoreByNameSaga);
+  //this also works
+  // yield takeEvery(GET_STORES, getStoreSaga);
+  // yield takeEvery(CREATE_STORE, createStoreSaga);
+  // yield takeEvery(DELETE_STORE_BY_NAME, createStoreByNameSaga);
+  yield all([
+    takeEvery(GET_STORES, getStoreSaga),
+    takeEvery(CREATE_STORE, createStoreSaga),
+    takeEvery(DELETE_STORE_BY_NAME, createStoreByNameSaga)
+  ]);
 
   // yield takeEvery(GET_USERS, getUsersSaga)
   // yield takeEvery(GET_USER_BY_ID, getUserByIdSaga)
