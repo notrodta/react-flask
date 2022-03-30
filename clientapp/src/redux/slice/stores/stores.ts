@@ -22,10 +22,11 @@ const stores = createSlice({
       return state;
     },
     editStoreSlice: (state: any, action) => {
-      state = state.map((i: any) => (i.id == action.payload.id ? action.payload : i));
+      //fix this: should map by name instead of id
+      // state = state.map((i: any) => (i.id == action.payload.id ? action.payload : i));
       return state;
     },
-    deleteStoreSlice: (state: StoresState, action) => {
+    deleteStoreSlice: (state: StoresState, action: PayloadAction<string>) => {
       state.stores = state.stores.filter((i: any) => i.name !== action.payload);
       return state;
     }

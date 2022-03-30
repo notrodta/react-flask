@@ -11,6 +11,7 @@ import { GET_STORES, CREATE_STORE, DELETE_STORE_BY_NAME } from '../../types/inde
 
 export function* getStoreSaga(): any {
   const stores = yield call(storeService.getAll);
+  console.log(stores);
   yield put(getStoresSlice(stores));
 }
 
