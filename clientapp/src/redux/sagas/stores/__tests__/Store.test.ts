@@ -17,9 +17,24 @@ describe('getStoreSaga', () => {
     };
 
     const generator = getStoreSaga();
-    const response = { stores: GetStoresMock };
+    const response: StoresState = { stores: GetStoresMock };
     expect(generator.next().value).toEqual(call(storeService.getAll));
     expect(generator.next(response).value).toEqual(put(getStoresSlice(state)));
+    expect(generator.next()).toEqual({ done: true, value: undefined });
+  });
+
+  it('failure triggers failure action', () => {
+    const state: StoresState = {
+      stores: []
+    };
+
+    const generator = getStoreSaga();
+    const response: StoresState = { stores: [] };
+
+    expect(generator.next().value).toEqual(call(storeService.getAll));
+
+    expect(generator.next(response).value).toEqual(put(getStoresSlice(state)));
+
     expect(generator.next()).toEqual({ done: true, value: undefined });
   });
 });
