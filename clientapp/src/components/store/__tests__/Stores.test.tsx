@@ -22,7 +22,7 @@ const server = setupServer(
     return res(ctx.status(201), ctx.json({ id: 3 }));
   }),
   rest.delete(deleteURL, (req, res, ctx) => {
-    return res(ctx.status(201), ctx.json({ message: 'STORE_DELETED' }));
+    return res(ctx.status(200), ctx.json({ message: 'STORE_DELETED' }));
   })
 );
 
@@ -30,6 +30,8 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
+// Difference between, get, query and find
+// https://levelup.gitconnected.com/the-difference-between-get-find-query-react-testing-library-bcd996ba3baa
 describe('Stores Component', () => {
   it('should show new store after clicking on submit button', async () => {
     render(
@@ -39,33 +41,29 @@ describe('Stores Component', () => {
         </BrowserRouter>
       </Provider>
     );
-    const textField = await screen.getByLabelText('Store name');
+    const textField = await screen.findByLabelText('Store name');
     fireEvent.change(textField, { target: { value: 'testStore' } });
-    const submitButton = await screen.getByText(/SUBMIT/i);
+    const submitButton = await screen.findByText(/SUBMIT/i);
     fireEvent.click(submitButton);
 
     const storeName = await screen.findByText('testStore');
 
     expect(storeName).toBeInTheDocument();
   });
-  // it('should delete store1 successfully', async () => {
-  //   render(
-  //     <Provider store={reduxStore}>
-  //       <BrowserRouter>
-  //         <Stores />
-  //       </BrowserRouter>
-  //     </Provider>
-  //   );
-  //   const textField = await screen.getByLabelText('Store name');
-  //   fireEvent.change(textField, { target: { value: 'testStore' } });
-  //   const submitButton = await screen.getByText(/SUBMIT/i);
-  //   fireEvent.click(submitButton);
+  it('should delete store1 successfully', async () => {
+    render(
+      <Provider store={reduxStore}>
+        <BrowserRouter>
+          <Stores />
+        </BrowserRouter>
+      </Provider>
+    );
 
-  //   const storeName = await screen.findByText('testStore');
+    const deleteButtons = await screen.findAllByRole('deleteStore');
+    fireEvent.click(deleteButtons[0]);
 
-  //   expect(storeName).toBeInTheDocument();
-  // });
+    const store1 = await screen.findByText('store1');
+
+    expect(store1).toBeNull;
+  });
 });
-
-// const SectionOne = screen.queryByText('Section 1')
-// expect(SectionOne).toBeNull()

@@ -59,7 +59,7 @@ const Stores = (props: IStores) => {
             {'   '}
             <Button
               variant="contained"
-              role="Delete Store"
+              role="deleteStore"
               onClick={() => dispatch({ type: DELETE_STORE_BY_NAME, name: store.name })}>
               Delete
             </Button>
