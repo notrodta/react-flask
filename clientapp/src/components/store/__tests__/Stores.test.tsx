@@ -14,6 +14,8 @@ const getAllURL = `${config.SiteUrl}/stores`;
 const postURL = `${config.SiteUrl}/store/testStore`;
 const deleteURL = `${config.SiteUrl}/store/testStore`;
 
+//TODO: Refactor: create a server.tx file and call setupServer in setupTest.ts
+//https://www.youtube.com/watch?v=oMv2eAGWtZU&ab_channel=TechCheck
 const server = setupServer(
   rest.get(getAllURL, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ stores: GetStoresMock }));
