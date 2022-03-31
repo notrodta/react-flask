@@ -11,27 +11,36 @@ import { GET_STORES, CREATE_STORE_BY_NAME, DELETE_STORE_BY_NAME } from '../../ty
 import { GetStoresMock } from '../../../models/Store';
 
 export function* getStoreSaga(): any {
-  const stores = yield call(storeService.getAll);
-  console.log(stores);
-  console.log(GetStoresMock);
-  yield put(getStoresSlice(stores));
+  try {
+    const stores = yield call(storeService.getAll);
+    console.log(stores);
+    console.log(GetStoresMock);
+    yield put(getStoresSlice(stores));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function* createStoreSaga(action: any): any {
   // yield storeService.post(action.store.name); // this also works
+
   try {
     const store = yield call(storeService.post, action.store.name);
     console.log(store);
     yield put(addStoreSlice(action.store));
   } catch (error) {
-    console.log('tes123t');
     console.log(error);
   }
 }
 
 export function* deleteStoreByNameSaga(action: any): any {
-  yield call(storeService.delete, action.name);
-  yield put(deleteStoreSlice(action.name));
+  try {
+    const result = yield call(storeService.delete, action.name);
+    console.log(result);
+    yield put(deleteStoreSlice(action.name));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export function* watchStoresAsync() {

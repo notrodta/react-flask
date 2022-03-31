@@ -11,14 +11,18 @@ import { GetStoresMock } from '../../../models/Store';
 
 const config = environmentConfig;
 const getAllURL = `${config.SiteUrl}/stores`;
-const postURL = `${config.SiteUrl}/store`;
+const postURL = `${config.SiteUrl}/store/testStore`;
+const deleteURL = `${config.SiteUrl}/store/testStore`;
 
 const server = setupServer(
   rest.get(getAllURL, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ stores: GetStoresMock }));
   }),
   rest.post(postURL, (req, res, ctx) => {
-    return res(ctx.status(201), ctx.json({ stores: GetStoresMock }));
+    return res(ctx.status(201), ctx.json({ id: 3 }));
+  }),
+  rest.delete(deleteURL, (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({ message: 'STORE_DELETED' }));
   })
 );
 
@@ -27,7 +31,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe('Stores Component', () => {
-  it('should click on submit button', async () => {
+  it('should show new store after clicking on submit button', async () => {
     render(
       <Provider store={reduxStore}>
         <BrowserRouter>
@@ -35,16 +39,33 @@ describe('Stores Component', () => {
         </BrowserRouter>
       </Provider>
     );
-    const textField = screen.getByLabelText('Store name');
+    const textField = await screen.getByLabelText('Store name');
     fireEvent.change(textField, { target: { value: 'testStore' } });
-    const submitButton = screen.getByText(/SUBMIT/i);
+    const submitButton = await screen.getByText(/SUBMIT/i);
     fireEvent.click(submitButton);
 
-    // const storeName = await screen.findByText('testStore');
+    const storeName = await screen.findByText('testStore');
 
-    // expect(storeName).toBeInTheDocument();
-
-    // expect(screen.getByText('Store1')).toBeInTheDocument();
-    expect(1).toBe(1);
+    expect(storeName).toBeInTheDocument();
   });
+  // it('should delete store1 successfully', async () => {
+  //   render(
+  //     <Provider store={reduxStore}>
+  //       <BrowserRouter>
+  //         <Stores />
+  //       </BrowserRouter>
+  //     </Provider>
+  //   );
+  //   const textField = await screen.getByLabelText('Store name');
+  //   fireEvent.change(textField, { target: { value: 'testStore' } });
+  //   const submitButton = await screen.getByText(/SUBMIT/i);
+  //   fireEvent.click(submitButton);
+
+  //   const storeName = await screen.findByText('testStore');
+
+  //   expect(storeName).toBeInTheDocument();
+  // });
 });
+
+// const SectionOne = screen.queryByText('Section 1')
+// expect(SectionOne).toBeNull()
