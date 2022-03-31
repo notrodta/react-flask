@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { watchStoresAsync, getStoreSaga, createStoreSaga, createStoreByNameSaga } from '../Store';
+import { watchStoresAsync, getStoreSaga, createStoreSaga, deleteStoreByNameSaga } from '../Store';
 import { GetStoresMock } from '../../../../models/Store';
 import storeService from '../../../../services/StoreService';
 import {

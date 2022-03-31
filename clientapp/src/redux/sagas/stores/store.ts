@@ -7,11 +7,13 @@ import {
   deleteStoreSlice
 } from '../../slice/stores/Stores';
 import storeService from '../../../services/StoreService';
-import { GET_STORES, CREATE_STORE, DELETE_STORE_BY_NAME } from '../../types/index';
+import { GET_STORES, CREATE_STORE_BY_NAME, DELETE_STORE_BY_NAME } from '../../types/index';
+import { GetStoresMock } from '../../../models/Store';
 
 export function* getStoreSaga(): any {
   const stores = yield call(storeService.getAll);
   console.log(stores);
+  console.log(GetStoresMock);
   yield put(getStoresSlice(stores));
 }
 
@@ -27,7 +29,7 @@ export function* createStoreSaga(action: any): any {
   }
 }
 
-export function* createStoreByNameSaga(action: any): any {
+export function* deleteStoreByNameSaga(action: any): any {
   yield call(storeService.delete, action.name);
   yield put(deleteStoreSlice(action.name));
 }
@@ -39,8 +41,8 @@ export function* watchStoresAsync() {
   // yield takeEvery(DELETE_STORE_BY_NAME, createStoreByNameSaga);
   yield all([
     takeEvery(GET_STORES, getStoreSaga),
-    takeEvery(CREATE_STORE, createStoreSaga),
-    takeEvery(DELETE_STORE_BY_NAME, createStoreByNameSaga)
+    takeEvery(CREATE_STORE_BY_NAME, createStoreSaga),
+    takeEvery(DELETE_STORE_BY_NAME, deleteStoreByNameSaga)
   ]);
 
   // yield takeEvery(GET_USERS, getUsersSaga)

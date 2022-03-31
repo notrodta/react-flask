@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { GET_STORES, CREATE_STORE, DELETE_STORE_BY_NAME } from '../../redux/types/index';
+import { GET_STORES, CREATE_STORE_BY_NAME, DELETE_STORE_BY_NAME } from '../../redux/types/index';
 import Store from '../../models/Store';
 import { ApplicationState } from '../../Store';
 import { setStoreSlice } from '../../redux/slice/stores/Store';
@@ -25,7 +25,7 @@ const Stores = (props: IStores) => {
   };
 
   const handleSubmit = () => {
-    dispatch({ type: CREATE_STORE, store });
+    dispatch({ type: CREATE_STORE_BY_NAME, store });
     const newStore = {} as Store;
     newStore.name = '';
     dispatch(setStoreSlice({ ...newStore }));
