@@ -9,7 +9,7 @@ import Store from '../../models/Store';
 import { ApplicationState } from '../../Store';
 import { setStoreSlice } from '../../redux/slice/stores/Store';
 import { nanoid } from '@reduxjs/toolkit';
-import { useStoreInput, useStoreSubmit } from '../common/hooks/useStore';
+import { useStore } from '../common/hooks/useStore';
 
 interface IStores extends RouteComponentProps<any> {}
 
@@ -18,8 +18,7 @@ const Stores = (props: IStores) => {
   const store = useSelector<ApplicationState, Store>((state) => state.store);
   const dispatch = useDispatch();
 
-  const { handleStoreChange } = useStoreInput();
-  const { handleStoreSubmit } = useStoreSubmit();
+  const { handleStoreChange, handleStoreSubmit } = useStore();
 
   useEffect(() => {
     dispatch({ type: GET_STORES });
