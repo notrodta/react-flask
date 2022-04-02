@@ -12,6 +12,8 @@ marshmallow = "*"
 flask-marshmallow = "*"
 marshmallow-sqlalchemy = "*"
 flask-cors = "*"
+pytest = "*"
+pytest-cov = "*"
 
 [dev-packages]
 

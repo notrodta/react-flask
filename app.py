@@ -17,6 +17,14 @@ app.config["PROPAGATE_EXCEPTIONS"] = True
 app.secret_key = "jose"  # could do app.config['JWT_SECRET_KEY'] if we prefer
 api = Api(app)
 
+def create_app():
+    app = Flask(__name__)
+    CORS(app)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["PROPAGATE_EXCEPTIONS"] = True
+    app.secret_key = "jose"  # could do app.config['JWT_SECRET_KEY'] if we prefer
+
 
 @app.before_first_request
 def create_tables():

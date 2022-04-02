@@ -9,6 +9,7 @@ import Store from '../../models/Store';
 import { ApplicationState } from '../../Store';
 import { setStoreSlice } from '../../redux/slice/stores/Store';
 import { nanoid } from '@reduxjs/toolkit';
+import { useStoreInput, useStoreSubmit } from '../common/hooks/useStore';
 
 interface IStores extends RouteComponentProps<any> {}
 
@@ -17,19 +18,8 @@ const Stores = (props: IStores) => {
   const store = useSelector<ApplicationState, Store>((state) => state.store);
   const dispatch = useDispatch();
 
-  const handleStoreChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    prop: string
-  ) => {
-    dispatch(setStoreSlice({ ...store, [prop]: e.target.value }));
-  };
-
-  const handleSubmit = () => {
-    dispatch({ type: CREATE_STORE_BY_NAME, store });
-    const newStore = {} as Store;
-    newStore.name = '';
-    dispatch(setStoreSlice({ ...newStore }));
-  };
+  const { handleStoreChange } = useStoreInput();
+  const { handleStoreSubmit } = useStoreSubmit();
 
   useEffect(() => {
     dispatch({ type: GET_STORES });
@@ -48,7 +38,7 @@ const Stores = (props: IStores) => {
           value={store.name}
           onChange={(e) => handleStoreChange(e, 'name')}
         />
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button variant="contained" onClick={handleStoreSubmit}>
           Submit
         </Button>
       </Grid>
