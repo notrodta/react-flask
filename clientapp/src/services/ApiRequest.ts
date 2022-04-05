@@ -22,8 +22,11 @@ const apiRequest = {
   get: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
     return axios.get(url, { ...defaultOptions, ...options });
   },
+  // post: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
+  //   return axios.post(url, { ...defaultOptions, ...options });
+  // },
   post: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
-    return axios.post(url, { ...defaultOptions, ...options });
+    return axios.post(url);
   },
   put: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
     return axios.put(url, { ...defaultOptions, ...options });
