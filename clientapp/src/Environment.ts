@@ -28,7 +28,7 @@ const environmentConfig = (): IEnvironment => {
   const config: IEnvironment = {
     Env: getEnvironment(),
     // SiteUrl: window.location.origin.toLowerCase()
-    SiteUrl: 'http://127.0.0.1:5000'
+    SiteUrl: 'http://127.0.0.1:5000/api'
   };
   return config;
 };

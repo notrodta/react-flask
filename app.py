@@ -11,8 +11,11 @@ from resources.store import Store, StoreList
 
 app = Flask(__name__)
 # CORS(app)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+# CORS(app, supports_credentials=True)
+# cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 # cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+# cors = CORS(app , resources={r"/*": {"origins": "*", "allow_headers": "*", "expose_headers": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -31,10 +34,10 @@ def handle_marshmallow_validation(err):
     return jsonify(err.messages), 400
 
 
-api.add_resource(Store, "/store/<string:name>")
-api.add_resource(StoreList, "/stores")
-api.add_resource(Item, "/item/<string:name>")
-api.add_resource(ItemList, "/items")
+api.add_resource(Store, "/api/store/<string:name>")
+api.add_resource(StoreList, "/api/stores")
+api.add_resource(Item, "/api/item/<string:name>")
+api.add_resource(ItemList, "/api/items")
 
 if __name__ == "__main__":
     db.init_app(app)
