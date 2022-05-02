@@ -40,7 +40,10 @@ def test_client():
 
 def populate_stores():
     store1 = StoreModel(id=1, name="My Test Store 1")
+    store2 = StoreModel(id=2, name="My Test Store 2")
+    # store1 = StoreModel(1, "My Test Store 1") //TODO: test this
     db.session.add(store1)
+    db.session.add(store2)
 
 
 def populate_items():
