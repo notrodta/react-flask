@@ -40,11 +40,11 @@ def create_app():
     api.add_resource(Item, "/api/item/<string:name>")
     api.add_resource(ItemList, "/api/items")
 
-    return app
-
-app  = create_app()
-
-if __name__ == "__main__":
     db.init_app(app)
     ma.init_app(app)
+
+    return app
+
+if __name__ == "__main__":
+    app = create_app()
     app.run(port=5000, debug=True)
