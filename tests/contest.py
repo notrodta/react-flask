@@ -1,6 +1,7 @@
 import pytest
 from db import db
 from app import create_app
+from config import TestingConfig
 
 from models.store import StoreModel
 from models.item import ItemModel
@@ -12,12 +13,13 @@ from tests.mock_data.static_item_data import ITEMS
 def test_client():
     app = create_app()
 
-    app.config["TESTING"] = True
+    # app.config["TESTING"] = True
     app.testing = True
 
     # This creates an in-memory sqlite db
     # See https://martin-thoma.com/sql-connection-strings/
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
+    # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
+    app.config.from_object(TestingConfig)
 
     client = app.test_client()
     with app.app_context():
