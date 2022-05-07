@@ -4,6 +4,7 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from marshmallow import ValidationError
 from flask_cors import CORS, cross_origin
+from flask_migrate import Migrate
 
 from db import db
 from ma import ma
@@ -28,6 +29,7 @@ def create_app():
     app.config["PROPAGATE_EXCEPTIONS"]= True
     # app.secret_key = "jose"  # could do app.config['JWT_SECRET_KEY'] if we prefer
     api = Api(app)
+    migrate = Migrate(app, db)
 
 
     @app.before_first_request
@@ -46,10 +48,11 @@ def create_app():
     api.add_resource(ItemList, "/api/items")
 
     ma.init_app(app)
+    db.init_app(app)
 
     return app
 
 if __name__ == "__main__":
     app = create_app()
-    db.init_app(app)
+    # db.init_app(app)
     app.run(port=5000, debug=True)

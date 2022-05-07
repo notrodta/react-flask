@@ -15,8 +15,14 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"
-   # SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://postgres:{os.getenv('DB_PASSWORD')}@postgres:5432/dev_db"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:password@localhost/react-flask"
+    # For using multiple databases
+    SQLALCHEMY_BINDS = {
+        'db2': "sqlite:///data.db",
+        # 'db3': 'mysql://user:pass@localhost/database3’
+    }
+    # SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"
+    # SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://postgres:{os.getenv('DB_PASSWORD')}@postgres:5432/dev_db"
 
 
 class TestingConfig(Config):
