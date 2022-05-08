@@ -2,23 +2,16 @@ import React, { useEffect } from 'react';
 import storeService from '../../services/StoreService';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { useItem } from './hooks/useItem';
 
-interface IItems extends RouteComponentProps<any> {}
+interface IItem extends RouteComponentProps<any> {}
 
-const Items = (props: IItems) => {
-  const handleItemNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
+const Item = (props: IItem) => {
+  let { id } = useParams() as any;
 
-  const handleItemPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log('submit');
-  };
+  const { item, handleItemNameChange, handleItemPriceChange, handleSubmit } = useItem(id);
 
   useEffect(() => {
     storeService.getAll().then((res) => {
@@ -36,20 +29,26 @@ const Items = (props: IItems) => {
           id="outlined-basic"
           label="Item name"
           variant="outlined"
-          onChange={handleItemNameChange}
+          value={item.name}
+          onChange={(e) => handleItemNameChange(e, 'name')}
         />
         <TextField
           id="outlined-basic"
           label="Price"
           variant="outlined"
-          onChange={handleItemPriceChange}
+          value={item.price}
+          onChange={(e) => handleItemPriceChange(e, 'price')}
         />
         <Button variant="contained" onClick={handleSubmit}>
           Submit
         </Button>
       </Grid>
+      <Grid item xs={6} />
+      <Grid item xs={6}>
+        <p>TODO: Display list of items here:</p>
+      </Grid>
     </Grid>
   );
 };
 
-export default withRouter(Items);
+export default withRouter(Item);
