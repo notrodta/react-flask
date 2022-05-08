@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Stores from '../Stores';
 import reduxStore from '../../../Store';
 import { BrowserRouter } from 'react-router-dom';
+import { stuff123, renderWithReduxAndRouter } from '../../../testUtils';
 // import { rest } from 'msw';
 // import { setupServer } from 'msw/node';
 // import environmentConfig from '../../../Environment';
@@ -32,17 +33,30 @@ import { BrowserRouter } from 'react-router-dom';
 // afterEach(() => server.resetHandlers());
 // afterAll(() => server.close());
 
+// const stuff = (
+//   <Provider store={reduxStore()}>
+//     <BrowserRouter>
+//       <Stores />
+//     </BrowserRouter>
+//   </Provider>
+// );
+
+// function stuff (ui) {
+//   return (
+//     <Provider store={reduxStore()}>
+//       <BrowserRouter>
+//         {ui}
+//       </BrowserRouter>
+//     </Provider>
+//   );
+// }
+
 // Difference between, get, query and find
 // https://levelup.gitconnected.com/the-difference-between-get-find-query-react-testing-library-bcd996ba3baa
 describe('Stores Component', () => {
   it('should show new store after clicking on submit button', async () => {
-    render(
-      <Provider store={reduxStore}>
-        <BrowserRouter>
-          <Stores />
-        </BrowserRouter>
-      </Provider>
-    );
+    renderWithReduxAndRouter(<Stores />);
+
     const textField = await screen.findByLabelText('Store name');
     fireEvent.change(textField, { target: { value: 'testStore' } });
     const submitButton = await screen.findByText(/SUBMIT/i);
@@ -53,14 +67,8 @@ describe('Stores Component', () => {
     expect(storeName).toBeInTheDocument();
   });
   it('should delete store1 successfully', async () => {
-    render(
-      <Provider store={reduxStore}>
-        <BrowserRouter>
-          <Stores />
-        </BrowserRouter>
-      </Provider>
-    );
-
+    renderWithReduxAndRouter(<Stores />);
+    
     const deleteButtons = await screen.findAllByRole('deleteStore');
     fireEvent.click(deleteButtons[0]);
 

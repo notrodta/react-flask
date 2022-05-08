@@ -13,16 +13,31 @@ export interface ApplicationState {
   item: Item;
 }
 
-const sagaMiddleware = createSagaMiddleware();
-const reduxStore = configureStore({
-  reducer: {
-    store: store,
-    stores: stores,
-    item: item
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware)
-});
-sagaMiddleware.run(rootSaga);
+export default () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const reduxStore = configureStore({
+    reducer: {
+      store: store,
+      stores: stores,
+      item: item
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware)
+  });
+  sagaMiddleware.run(rootSaga);
 
-export default reduxStore;
+  return reduxStore;
+};
+// const sagaMiddleware = createSagaMiddleware();
+// const reduxStore = configureStore({
+//   reducer: {
+//     store: store,
+//     stores: stores,
+//     item: item
+//   },
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware)
+// });
+// sagaMiddleware.run(rootSaga);
+
+// export default reduxStore;

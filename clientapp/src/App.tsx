@@ -5,9 +5,11 @@ import reduxStore from './Store';
 import Routes from './routes/Routes';
 import ErrorBoundary from './components/common/ErrorBoundary';
 
+const store = reduxStore();
+
 function App() {
   return (
-    <Provider store={reduxStore}>
+    <Provider store={store}>
       <div className="App">
         <ErrorBoundary>
           <Routes />
