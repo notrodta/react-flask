@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import Stores from '../Stores';
 import reduxStore from '../../../Store';
 import { BrowserRouter } from 'react-router-dom';
-import { stuff123, renderWithReduxAndRouter } from '../../../testUtils';
+import { renderWithReduxAndRouter } from '../../../testUtils';
 // import { rest } from 'msw';
 // import { setupServer } from 'msw/node';
 // import environmentConfig from '../../../Environment';
@@ -68,7 +68,7 @@ describe('Stores Component', () => {
   });
   it('should delete store1 successfully', async () => {
     renderWithReduxAndRouter(<Stores />);
-    
+
     const deleteButtons = await screen.findAllByRole('deleteStore');
     fireEvent.click(deleteButtons[0]);
 
