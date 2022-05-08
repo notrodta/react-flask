@@ -1,6 +1,7 @@
 from flask_restful import Resource
 from models.store import StoreModel
 from schemas.store import StoreSchema
+from logger import logger
 
 NAME_ALREADY_EXISTS = "A store with name '{}' already exists."
 ERROR_INSERTING = "An error occurred while inserting the store."
@@ -46,4 +47,5 @@ class Store(Resource):
 class StoreList(Resource):
     @classmethod
     def get(cls):
+        logger.info("Get all stores")
         return {"stores": store_list_schema.dump(StoreModel.find_all())}, 200
