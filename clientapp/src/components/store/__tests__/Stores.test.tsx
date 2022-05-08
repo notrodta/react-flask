@@ -33,23 +33,6 @@ import { renderWithReduxAndRouter } from '../../../testUtils';
 // afterEach(() => server.resetHandlers());
 // afterAll(() => server.close());
 
-// const stuff = (
-//   <Provider store={reduxStore()}>
-//     <BrowserRouter>
-//       <Stores />
-//     </BrowserRouter>
-//   </Provider>
-// );
-
-// function stuff (ui) {
-//   return (
-//     <Provider store={reduxStore()}>
-//       <BrowserRouter>
-//         {ui}
-//       </BrowserRouter>
-//     </Provider>
-//   );
-// }
 
 // Difference between, get, query and find
 // https://levelup.gitconnected.com/the-difference-between-get-find-query-react-testing-library-bcd996ba3baa
