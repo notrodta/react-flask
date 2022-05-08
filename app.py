@@ -7,13 +7,13 @@ from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
 import logging
 
+from config import Config
 from db import db
 from ma import ma
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-from config import Config
-
+# take out filename to see log in console
 logging.basicConfig(filename='logs.log', level=logging.DEBUG, filemode='w',
                     format=f'%(asctime)s %(levelname)s %(name)s %('
                            f'threadName)s : %(message)s')
