@@ -26,3 +26,9 @@ flask db migrate -m "initial migration"
 flask db upgrade
 
 flask db downgrade
+
+--- TODO ---
+
+Email
+
+Daily Jobs/Tasks
