@@ -32,3 +32,5 @@ flask db downgrade
 Email
 
 Daily Jobs/Tasks
+
+OpenIdConnect: authorization and authentication
