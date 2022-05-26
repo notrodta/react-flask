@@ -33,4 +33,8 @@ Email
 
 Daily Jobs/Tasks
 
-OpenIdConnect: authorization and authentication
+OpenIdConnect: authorization and authentication: https://developer.okta.com/blog/2018/12/20/crud-app-with-python-flask-react
+
+Docker
+
+Deploy on AWS
