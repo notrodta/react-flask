@@ -12,7 +12,8 @@ class Config:
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-
+# https://flask-sqlalchemy.palletsprojects.com/en/2.x/binds/
+# need to use __bind_key__ for flask to know which db to use. By default, it will use SQLALCHEMY_DATABASE_URI
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:password@localhost/react-flask"
