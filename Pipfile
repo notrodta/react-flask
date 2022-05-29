@@ -17,6 +17,7 @@ pytest-cov = "*"
 pytest-flask = "*"
 flask-migrate = "*"
 psycopg2 = "*"
+flask-apispec = "==0.11.0"
 
 [dev-packages]
 

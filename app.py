@@ -13,11 +13,18 @@ from ma import ma
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-# take out filename to see log in console
-logging.basicConfig(filename='logs.log', level=logging.DEBUG, filemode='w',
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
+from flask_apispec.extension import FlaskApiSpec
+
+# uncomment below to get logs in log file
+# logging.basicConfig(filename='logs.log', level=logging.DEBUG, filemode='w',
+#                     format=f'%(asctime)s %(levelname)s %(name)s %('
+#                            f'threadName)s : %(message)s')
+
+logging.basicConfig(level=logging.DEBUG, filemode='w',
                     format=f'%(asctime)s %(levelname)s %(name)s %('
                            f'threadName)s : %(message)s')
-
 
 def create_app():
     app = Flask(__name__)
@@ -37,6 +44,18 @@ def create_app():
     api = Api(app)
     migrate = Migrate(app, db)
 
+    app.config.update({
+        'APISPEC_SPEC': APISpec(
+            title='Awesome Project',
+            version='v1',
+            plugins=[MarshmallowPlugin()],
+            openapi_version='2.0.0'
+        ),
+        'APISPEC_SWAGGER_URL': '/swagger/',  # URI to access API Doc JSON
+        'APISPEC_SWAGGER_UI_URL': '/swagger-ui/'  # URI to access UI of API Doc
+    })
+    docs = FlaskApiSpec(app)
+
     @app.before_first_request
     def create_tables():
         db.create_all()
@@ -49,6 +68,9 @@ def create_app():
     api.add_resource(StoreList, "/api/stores")
     api.add_resource(Item, "/api/item/<string:name>")
     api.add_resource(ItemList, "/api/items")
+
+    docs.register(Store)
+    docs.register(StoreList)
 
     ma.init_app(app)
     db.init_app(app)
