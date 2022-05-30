@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import UserLoginInfo from '../../models/User';
 import userService from '../../services/UserService';
+import { accessToken } from '../../services/ApiRequest';
+import { getCookie } from '../../common/helper';
 
 interface IUserLogin extends RouteComponentProps<any> {}
 
@@ -21,6 +23,7 @@ const UserLogin = (props: IUserLogin) => {
     userService.post(userInfo).then((data: { access_token: string; refresh_token: string }) => {
       console.log(data);
       document.cookie = `accessToken=${data.access_token}`;
+      window.location.reload();
     });
   };
 

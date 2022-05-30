@@ -27,7 +27,7 @@ export function* createStoreSaga(action: any): any {
   try {
     const store = yield call(storeService.post, action.store.name);
     console.log(store);
-    yield put(addStoreSlice(action.store));
+    if (store) yield put(addStoreSlice(action.store));
   } catch (error) {
     console.log(error);
   }
