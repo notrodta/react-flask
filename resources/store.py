@@ -4,6 +4,7 @@ from schemas.store import StoreSchema
 from flask_apispec.views import MethodResource
 from flask_apispec import marshal_with, doc, use_kwargs
 from marshmallow import Schema, fields
+from flask_jwt_extended import jwt_required
 from logger import logger
 
 NAME_ALREADY_EXISTS = "A store with name '{}' already exists."
@@ -17,6 +18,7 @@ store_list_schema = StoreSchema(many=True)
 
 class Store(MethodResource, Resource):
     @doc(description='Get store by name', tags=['Store'])
+    @jwt_required()
     def get(self, name: str):
         store = StoreModel.find_by_name(name)
         if store:
@@ -25,6 +27,7 @@ class Store(MethodResource, Resource):
         return {"message": STORE_NOT_FOUND}, 404
 
     @doc(description='Create new store', tags=['Store'])
+    @jwt_required(fresh=True)
     def post(self, name: str):
         if StoreModel.find_by_name(name):
             return {"message": NAME_ALREADY_EXISTS.format(name)}, 400
