@@ -10,10 +10,26 @@ export interface IAxiosRequestOptions {
   reponseType?: any;
 }
 
+function getCookie(cname: any) {
+  let name = cname + '=';
+  let ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return '';
+}
+
 const defaultOptions: IAxiosRequestOptions = {
   accept: 'application/json',
   headers: {
     'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + getCookie('accessToken'),
     ...(getEnvironment() !== 'LOCAL' && { Pragma: 'no-cache' })
   }
 };
