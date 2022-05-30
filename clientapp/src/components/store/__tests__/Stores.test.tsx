@@ -40,7 +40,7 @@ describe('Stores Component', () => {
   it('should show new store after clicking on submit button', async () => {
     renderWithReduxAndRouter(<Stores />);
 
-    const textField = await screen.findByLabelText('Store name');
+    const textField = await screen.getByTestId('store-name');
     fireEvent.change(textField, { target: { value: 'testStore' } });
     const submitButton = await screen.findByText(/SUBMIT/i);
     fireEvent.click(submitButton);
