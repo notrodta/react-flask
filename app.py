@@ -135,7 +135,7 @@ def create_app():
     api.add_resource(TokenRefresh, '/api/refresh')
     api.add_resource(UserLogout, '/api/logout')
     # api.add_resource(Github_Login, '/api/githublogin/<string:code>')
-    api.add_resource(Github_Login, '/api/github/<string:code>')
+    api.add_resource(Github_Login, '/api/github-login/<string:code>')
 
 
     docs.register(Store)

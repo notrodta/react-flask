@@ -28,7 +28,7 @@ function getCookie(cname: any) {
 }
 
 accessToken.accessToken = getCookie('accessToken');
-console.log(accessToken.accessToken);
+console.log('request token:', accessToken.accessToken);
 
 const defaultOptions: IAxiosRequestOptions = {
   accept: 'application/json',

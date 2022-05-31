@@ -29,7 +29,7 @@ const userService = {
   //     })
   githubLogin: (code: string): Promise<any> =>
     apiRequest
-      .post(`${config.SiteUrl}/github/${code}`)
+      .post(`${config.SiteUrl}/github-login/${code}`)
       .then((response: AxiosResponse) => {
         return response ? response.data : {};
       })
