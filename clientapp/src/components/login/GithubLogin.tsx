@@ -6,16 +6,18 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import UserLoginInfo from '../../models/User';
 import userService from '../../services/UserService';
+import { useHistory } from 'react-router-dom';
 
 interface IGithubLogin extends RouteComponentProps<any> {}
 
 const GithubLogin = (props: IGithubLogin) => {
   const submitGithub = async (values: any) => {
     userService.githubLogin(values).then((data: any) => {
-      console.log(data.access_token);
+      console.log('token:', data.access_token);
       document.cookie = `accessToken=${data.access_token}`;
-      // window.location.reload();
-      // window.location.href = '/';
+      localStorage.setItem('accessToken', data.access_token);
+      window.location.reload();
+      props.history.push('/');
     });
   };
 
@@ -38,7 +40,7 @@ const GithubLogin = (props: IGithubLogin) => {
       // send the code to the backend
       submitGithub(data as any);
     }
-  }, [submitGithub]);
+  }, []);
 
   return (
     <Grid item xs={12}>
