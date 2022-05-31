@@ -29,6 +29,8 @@ flask db downgrade
 
 --- TODO ---
 
+Fix pytests
+
 Email
 
 Daily Jobs/Tasks
