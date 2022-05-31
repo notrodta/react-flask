@@ -6,7 +6,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', default='A very terrible secret key.')
-    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', default='A very terrible JWT secret key.')
 
     FLASK_ENV = 'development'
     DEBUG = False

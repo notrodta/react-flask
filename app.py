@@ -10,12 +10,10 @@ import logging
 from config import Config
 from db import db
 from ma import ma
-from oa import oauth
-from blacklist import BLACKLIST
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from resources.user import UserRegister, User, UserLogin, TokenRefresh, UserLogout
-from resources.github_login import GithubLogin, GithubAuthorize
+from blacklist import BLACKLIST
 
 
 from apispec import APISpec
@@ -136,15 +134,12 @@ def create_app():
     api.add_resource(UserLogin, '/api/login')
     api.add_resource(TokenRefresh, '/api/refresh')
     api.add_resource(UserLogout, '/api/logout')
-    api.add_resource(GithubLogin, "/login/github")
-    api.add_resource(GithubAuthorize, "/login/github/authorized", endpoint="github.authorize")
 
     docs.register(Store)
     docs.register(StoreList)
 
     ma.init_app(app)
     db.init_app(app)
-    oauth.init_app(app)
 
     app.logger.debug("debug")
     app.logger.info("info")
