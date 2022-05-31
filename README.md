@@ -31,6 +31,10 @@ flask db downgrade
 
 Fix pytests
 
+Role based authorization on endpoints: https://flask-jwt-extended.readthedocs.io/en/latest/custom_decorators/
+
+See if I dont need to create extra access token
+
 Email
 
 Daily Jobs/Tasks
