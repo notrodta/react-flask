@@ -27,6 +27,7 @@ function getCookie(cname: any) {
   return '';
 }
 
+// currently storing in local storage b/c token from github gets deleted when url changes (need to look into this)
 // accessToken.accessToken = getCookie('accessToken');
 accessToken.accessToken = localStorage.getItem('accessToken');
 console.log('request token:', accessToken.accessToken);
