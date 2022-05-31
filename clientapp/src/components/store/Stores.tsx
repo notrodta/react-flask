@@ -35,6 +35,7 @@ const Stores = (props: IStores) => {
       <Grid item xs={12}>
         <TextField
           id="outlined-basic"
+          inputProps={{ 'data-testid': 'store-name' }}
           label="Store name"
           variant="outlined"
           value={store.name}
