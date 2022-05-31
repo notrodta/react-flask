@@ -12,6 +12,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useStore } from './hooks/useStore';
 import constants from '../../Constants';
 import UserLogin from '../login/UserLogin';
+import GithubLogin from '../login/GithubLogin';
 
 interface IStores extends RouteComponentProps<any> {}
 
@@ -29,6 +30,7 @@ const Stores = (props: IStores) => {
   return (
     <Grid container spacing={2}>
       <UserLogin />
+      <GithubLogin />
       <Grid item xs={12}>
         <p>Stores Page</p>
       </Grid>
