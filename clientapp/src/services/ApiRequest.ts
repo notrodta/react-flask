@@ -2,7 +2,7 @@ import axios, { AxiosPromise } from 'axios';
 // import { GetEnvironment } from '../environment';
 import { getEnvironment } from '../Environment';
 
-export const accessToken: { accessToken: string } = { accessToken: '' };
+export const accessToken: { accessToken: string | null } = { accessToken: '' };
 
 export interface IAxiosRequestOptions {
   accept?: string;
@@ -27,14 +27,15 @@ function getCookie(cname: any) {
   return '';
 }
 
-accessToken.accessToken = getCookie('accessToken');
-console.log(accessToken.accessToken);
+// accessToken.accessToken = getCookie('accessToken');
+accessToken.accessToken = localStorage.getItem('accessToken');
+console.log('request token:', accessToken.accessToken);
 
 const defaultOptions: IAxiosRequestOptions = {
   accept: 'application/json',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + accessToken.accessToken,
+    Authorization: 'Bearer ' + accessToken.accessToken || 'none!!',
     ...(getEnvironment() !== 'LOCAL' && { Pragma: 'no-cache' })
   }
 };

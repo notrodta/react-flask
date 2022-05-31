@@ -16,6 +16,26 @@ const userService = {
       .catch(function (error) {
         console.log(data);
         handleError(error);
+      }),
+  // githubLogin: (code: string): Promise<any> =>
+  //   apiRequest
+  //     .post(`${config.SiteUrl}/githublogin`, code)
+  //     .then((response: AxiosResponse) => {
+  //       return response ? response.data : {};
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //       handleError(error);
+  //     })
+  githubLogin: (code: string): Promise<any> =>
+    apiRequest
+      .post(`${config.SiteUrl}/github-login/${code}`)
+      .then((response: AxiosResponse) => {
+        return response ? response.data : {};
+      })
+      .catch(function (error) {
+        console.log(error);
+        handleError(error);
       })
 };
 

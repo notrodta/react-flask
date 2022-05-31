@@ -23,6 +23,7 @@ const UserLogin = (props: IUserLogin) => {
     userService.post(userInfo).then((data: { access_token: string; refresh_token: string }) => {
       console.log(data);
       document.cookie = `accessToken=${data.access_token}`;
+      localStorage.setItem('accessToken', data.access_token);
       window.location.reload();
     });
   };

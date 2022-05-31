@@ -10,11 +10,11 @@ import logging
 from config import Config
 from db import db
 from ma import ma
+from blacklist import BLACKLIST
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from resources.user import UserRegister, User, UserLogin, TokenRefresh, UserLogout
-from blacklist import BLACKLIST
-
+from resources.github_login import Github_Login
 
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
@@ -134,6 +134,9 @@ def create_app():
     api.add_resource(UserLogin, '/api/login')
     api.add_resource(TokenRefresh, '/api/refresh')
     api.add_resource(UserLogout, '/api/logout')
+    # api.add_resource(Github_Login, '/api/githublogin/<string:code>')
+    api.add_resource(Github_Login, '/api/github-login/<string:code>')
+
 
     docs.register(Store)
     docs.register(StoreList)
