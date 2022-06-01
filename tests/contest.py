@@ -1,4 +1,5 @@
 import pytest
+ 
 from db import db
 from app import create_app
 from config import TestingConfig
@@ -30,6 +31,16 @@ def test_client():
     yield client
 
     db.session.remove()
+
+
+@pytest.fixture(autouse=True)
+def neuter_jwt(monkeypatch):
+  def no_verify(optional, fresh, refresh, locations, verify_type):
+    pass
+
+  from flask_jwt_extended import view_decorators
+
+  monkeypatch.setattr(view_decorators, 'verify_jwt_in_request', no_verify)
 
 
 

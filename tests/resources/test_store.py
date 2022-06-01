@@ -1,5 +1,5 @@
 import pytest
-from tests.contest import test_client
+from tests.contest import test_client, neuter_jwt
 
 
 def test_get_all_stores(test_client):
@@ -7,8 +7,6 @@ def test_get_all_stores(test_client):
     assert result.status_code == 200
     stores = result.json
     assert len(stores) == 1
-
-
 
 def test_get_store_by_name(test_client):
     result = test_client.get('/api/store/My Test Store 1')
@@ -20,6 +18,7 @@ def test_get_store_by_name(test_client):
 
 
 def test_get_store_by_name_404_error(test_client):
+
     result = test_client.get('/api/store/NotExist')
     assert result.status_code == 404
 
