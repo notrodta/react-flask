@@ -16,7 +16,6 @@ const GithubLogin = (props: IGithubLogin) => {
       console.log('token:', data.access_token);
       document.cookie = `accessToken=${data.access_token}`;
       localStorage.setItem('accessToken', data.access_token);
-      window.location.reload();
       props.history.push('/');
     });
   };
@@ -28,10 +27,8 @@ const GithubLogin = (props: IGithubLogin) => {
 
   useEffect(() => {
     // see if code was returned, returns an error if the user denies the request
-    console.log('test');
     const newUrl = window.location.href;
     const hasCode = newUrl.includes('?code=');
-    console.log(hasCode);
 
     if (hasCode) {
       // get the code value

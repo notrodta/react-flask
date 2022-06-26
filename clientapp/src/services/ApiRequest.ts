@@ -36,25 +36,32 @@ const defaultOptions: IAxiosRequestOptions = {
   accept: 'application/json',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + accessToken.accessToken || 'none!!',
     ...(getEnvironment() !== 'LOCAL' && { Pragma: 'no-cache' })
   }
 };
 
 const apiRequest = {
   get: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
+    defaultOptions.headers.Authorization =
+      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
     return axios.get(url, { ...defaultOptions, ...options });
   },
   post: <T>(url: string, data = {}, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
+    defaultOptions.headers.Authorization =
+      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
     return axios.post(url, data, { ...defaultOptions, ...options });
   },
   // post: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
   //   return axios.post(url);
   // },
   put: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
+    defaultOptions.headers.Authorization =
+      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
     return axios.put(url, { ...defaultOptions, ...options });
   },
   delete: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
+    defaultOptions.headers.Authorization =
+      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
     return axios.delete(url, { ...defaultOptions, ...options });
   }
 };
