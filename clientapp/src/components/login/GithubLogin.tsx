@@ -7,15 +7,17 @@ import Button from '@mui/material/Button';
 import UserLoginInfo from '../../models/User';
 import userService from '../../services/UserService';
 import { useHistory } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 interface IGithubLogin extends RouteComponentProps<any> {}
 
 const GithubLogin = (props: IGithubLogin) => {
+  const cookies = new Cookies();
+
   const submitGithub = async (values: any) => {
     userService.githubLogin(values).then((data: any) => {
       console.log('token:', data.access_token);
-      document.cookie = `accessToken=${data.access_token}`;
-      localStorage.setItem('accessToken', data.access_token);
+      cookies.set('accessToken', data.access_token, { path: '/' });
       props.history.push('/');
     });
   };

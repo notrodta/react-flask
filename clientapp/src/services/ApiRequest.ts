@@ -27,10 +27,11 @@ function getCookie(cname: any) {
   return '';
 }
 
-// currently storing in local storage b/c token from github gets deleted when url changes (need to look into this)
-// accessToken.accessToken = getCookie('accessToken');
-accessToken.accessToken = localStorage.getItem('accessToken');
-console.log('request token:', accessToken.accessToken);
+function setAccessToken() {
+  defaultOptions.headers.Authorization = 'Bearer ' + getCookie('accessToken') || 'none!!';
+  // console.log(getCookie('accessToken'));
+  // console.log(defaultOptions.headers.Authorization);
+}
 
 const defaultOptions: IAxiosRequestOptions = {
   accept: 'application/json',
@@ -42,26 +43,22 @@ const defaultOptions: IAxiosRequestOptions = {
 
 const apiRequest = {
   get: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
-    defaultOptions.headers.Authorization =
-      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
+    setAccessToken();
     return axios.get(url, { ...defaultOptions, ...options });
   },
   post: <T>(url: string, data = {}, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
-    defaultOptions.headers.Authorization =
-      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
+    setAccessToken();
     return axios.post(url, data, { ...defaultOptions, ...options });
   },
   // post: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
   //   return axios.post(url);
   // },
   put: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
-    defaultOptions.headers.Authorization =
-      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
+    setAccessToken();
     return axios.put(url, { ...defaultOptions, ...options });
   },
   delete: <T>(url: string, options: IAxiosRequestOptions = {}): AxiosPromise<T[]> => {
-    defaultOptions.headers.Authorization =
-      'Bearer ' + localStorage.getItem('accessToken') || 'none!!';
+    setAccessToken();
     return axios.delete(url, { ...defaultOptions, ...options });
   }
 };
